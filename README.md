@@ -6,6 +6,31 @@ Durak is a card game that is popular in post-Soviet states. The objective of the
 
 ## Task Description
 
+### Game rules:
+a. *Setup*: The game is typically played with two to six people,
+using a deck of 36 cards, for example a standard 52-card deck
+from which the numerical cards 2 through 5 have been
+removed. The game can be played with six people if desired.
+The deck is shuffled, and each player receives six cards. The
+bottom card of the remaining deck is laid open on the table.
+This determines the trump suit. The remainder of the deck is
+then placed on top of the revealed card at a 90 degree angle,
+so that it remains visible, forming a draw pile called the prikup
+("talon"). The revealed card remains part of the talon and is
+drawn as the last card. Cards discarded due to successful
+defenses are placed in a discard pile next to the talon.
+
+b. *Game start*: The player with the lowest trump is the first
+attacker. The player to the attacker's left is always the defender.
+After each turn play proceeds clockwise. If the attack succeeds
+(see below), the defender loses their turn and the attack passes
+to the player on the defender's left. If the attack fails, the
+defender becomes the next attacker.
+
+c. *Attack*: The attacker opens the turn by playing one card face up
+on the table as an attacking card. The player to the attacker's
+
+
 ## Progress
 
 We've built a basic implementation of the game. 
