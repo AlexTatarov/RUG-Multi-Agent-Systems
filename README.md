@@ -8,32 +8,27 @@ Durak is a card game that is popular in post-Soviet states. The objective of the
 
 ### Game rules:
 #### a. *Setup*: 
-The game is typically played with two to six people,
-using a deck of 36 cards, for example a standard 52-card deck
-from which the numerical cards 2 through 5 have been
-removed. The game can be played with six people if desired.
-The deck is shuffled, and each player receives six cards. The
-bottom card of the remaining deck is laid open on the table.
-This determines the trump suit. The remainder of the deck is
-then placed on top of the revealed card at a 90 degree angle,
-so that it remains visible, forming a draw pile called the prikup
-("talon"). The revealed card remains part of the talon and is
-drawn as the last card. Cards discarded due to successful
-defenses are placed in a discard pile next to the talon.
+The game is typically played with two to six people, using a deck of 36 cards, for example a standard 52-card deck from which the numerical cards 2 through 5 have been removed. The game can be played with six people if desired. The deck is shuffled, and each player receives six cards. The bottom card of the remaining deck is laid open on the table. This determines the trump suit. The remainder of the deck is then placed on top of the revealed card at a 90 degree angle, so that it remains visible, forming a draw pile called the prikup ("talon"). The revealed card remains part of the talon and is drawn as the last card. Cards discarded due to successful defenses are placed in a discard pile next to the talon.
 
 #### b. *Game start*: 
-The player with the lowest trump is the first
-attacker. The player to the attacker's left is always the defender.
-After each turn play proceeds clockwise. If the attack succeeds
-(see below), the defender loses their turn and the attack passes
-to the player on the defender's left. If the attack fails, the
-defender becomes the next attacker.
+The player with the lowest trump is the first attacker. The player to the attacker's left is always the defender. After each turn play proceeds clockwise. If the attack succeeds (see below), the defender loses their turn and the attack passes to the player on the defender's left. If the attack fails, the defender becomes the next attacker.
 
 #### c. *Attack*: 
-The attacker opens the turn by playing one card face up
-on the table as an attacking card. The player to the attacker's
+The attacker opens the turn by playing one card face up on the table as an attacking card. The player to the attacker's left is the defender. In the basic *podkidnoy* (подкидной, "throw-in") variant, and in most other variants of “durak”, the defender has to immediately attempt defense in response to the initial attack. Ace is the highest rank and six is the lowest. Trumps always beat non-trump cards regardless of rank.
+
+#### d. *Defense*: 
+The defender attempts to beat the attacking cards by playing higher-valued defending cards from their hand. One card is played to defend against each attacking card, and it must be in the attacking card's suit or the trump suit. The defending cards are placed on top of the attacking cards so that players can keep track of which card is defending against which. At any point during a defense, all players other than the defender can add extra attacking cards, provided that for each new attacking card, there is already a card of the same rank on the table (either defending or attacking), and the total number of attacking cards does not exceed the number of cards in the
+defender's hand. The defender must also defend against these new cards. If at any point multiple players wish to add cards simultaneously, the first attacker has first priority, then the player to defender's left, and so forth clockwise. At any point during the turn, a defender unwilling or unable to beat all attacking cards may abandon the defense by picking up all the cards on the table. This ends the turn. The failed defender loses their turn to attack; hence the player to the defender's left attacks next. If, however, the defender has beaten all attacking cards, and no other players are willing or able to add more, the defender has triumphed. The turn ends, all cards on the table are placed in the discard pile, and play passes to the left: the successful defender opens the next turn as the new attacker. No players may examine the discard pile at any point.
+
+#### e. *End of turn*: 
+At the end of each turn, whether or not the defense was successful, each player draws until they have six cards in their hand or the talon is exhausted. The main attackerdraws as many cards as necessary first, followed by any other attackers in clockwise order, and finally the defender. Once the talon is empty, play continues without further drawing. Players who exhaust their hands leave the game.
+
+#### f. *Winning or losing*:
+The last person left with cards in their hand is the loser (the *fool* or *"durak"*).
 
 ____________________
+____________________
+
 
 ## Progress
 
