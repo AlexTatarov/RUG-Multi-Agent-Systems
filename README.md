@@ -33,6 +33,7 @@ defender becomes the next attacker.
 The attacker opens the turn by playing one card face up
 on the table as an attacking card. The player to the attacker's
 
+____________________
 
 ## Progress
 
