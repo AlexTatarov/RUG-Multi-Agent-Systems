@@ -1,5 +1,4 @@
 
-![alt text](https://github.com/AlexTatarov/RUG-Multi-Agent-Systems/blob/master/Regular_Durak.jpg)
 
 ## Introduction
 
