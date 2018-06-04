@@ -31,3 +31,13 @@ User is an extension of the Player class and implements the decision making for 
 
 ## Future Improvements
 Build a UI for better representation of the game as stated above. Extend the game to more or less players (2-6), however it is not exactly the goal of this course. Implement different types of player behaviour for AI players. For example: 'aggressive' player (who would attack and risk more), 'cautious' player(who would attack and risk less and defend more), 'moderate' player (medium levels of aggresiveness and cautiousness). Try AI players determine the type of player they play against using knowledge database and change its own tactics based on that (needs the previous point with 'types of players' to be implemented).  
+
+
+
+## About the Project:
+
+This game is part of the final Project for the course [Multi-Agent Systems](https://www.rug.nl/ocasys/rug/vak/show?code=KIM.MAS03) at the [University of Groningen](https://www.rug.nl/). This project is developed by a team of three members:
+
+1. Alex Tatarov (s3401332)
+2. Micha de Rijk (s2671492)
+3. Md. Ataur Rahman (s3521346)
