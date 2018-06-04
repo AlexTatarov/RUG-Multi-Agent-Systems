@@ -1,7 +1,7 @@
 
 ## Introduction
 
-Durak is a card game that is popular in post-Soviet states. The objective of the game is to get rid of all one's cards when there are no more cards left in the deck. At the end of the game, the last player with cards in their hand is the ​fool​
+Durak is a card game that is popular in post-Soviet states. The objective of the game is to get rid of all one's cards when there are no more cards left in the deck. At the end of the game, the last player with cards in their hand is the fool.
 
 ## Task Description
 
