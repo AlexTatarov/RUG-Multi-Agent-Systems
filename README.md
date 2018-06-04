@@ -70,7 +70,7 @@ ____________________
 
 ## About the Project:
 
-This game is part of the final Project for the course [Multi-Agent Systems](https://www.rug.nl/ocasys/rug/vak/show?code=KIM.MAS03) at the [University of Groningen](https://www.rug.nl/). This project is developed by a team of three members:
+This game is part of the final Project for the course [Multi-Agent Systems](https://www.rug.nl/ocasys/rug/vak/show?code=KIM.MAS03) at the [University of Groningen](https://www.rug.nl/). The project is developed by a team of three members:
 
 1. Alex Tatarov (s3401332)
 2. Micha de Rijk (s2671492)
