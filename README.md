@@ -58,13 +58,13 @@ ____________________
 
 ## Future Improvements
 
-* Build a UI for better representation of the game as stated above. 
+- Build a UI for better representation of the game as stated above. 
 
-*Extend the game to more or less players (2-6), however it is not exactly the goal of this course. 
+- Extend the game to more or less players (2-6), however it is not exactly the goal of this course. 
 
-*Implement different types of player behaviour for AI players. For example: 'aggressive' player (who would attack and risk more), 'cautious' player(who would attack and risk less and defend more), 'moderate' player (medium levels of aggresiveness and cautiousness). 
+- Implement different types of player behaviour for AI players. For example: 'aggressive' player (who would attack and risk more), 'cautious' player(who would attack and risk less and defend more), 'moderate' player (medium levels of aggresiveness and cautiousness). 
 
-*Try AI players determine the type of player they play against using knowledge database and change its own tactics based on that (needs the previous point with 'types of players' to be implemented).  
+- Try AI players determine the type of player they play against using knowledge database and change its own tactics based on that (needs the previous point with 'types of players' to be implemented).  
 
 ____________________
 
