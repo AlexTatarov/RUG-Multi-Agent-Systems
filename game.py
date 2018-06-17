@@ -2,6 +2,7 @@
 from card import Card
 from computer import Computer
 import random
+import numpy as np
 
 class Game:
 	def __init__(self, players):
@@ -11,6 +12,9 @@ class Game:
 		self.defending_cards = []
 		self.discard_pile = []
 		
+		# smallest card that every player could not defend
+		self.smallest = [[8 for x in range(4)] for y in range(players)]
+
 		self.players = players
 		self.common_knowledge = {}
 	
@@ -64,7 +68,7 @@ class Game:
 		self.has_ended = True
 
 def main():
-	player_count = 2
+	player_count = 3
 	
 	# create players
 	players = []

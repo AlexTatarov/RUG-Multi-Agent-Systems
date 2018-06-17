@@ -32,6 +32,10 @@ class Card:
 		For example: Card('A', 'hearts', False) < Card('7', 'spades', True)
 		"""
 		return not (self > other)
+
+	def __eq__(self, suit, value):
+
+		return (self.suit == suit) and (self.value == value) 
 	
 	def __repr__(self):
 		return '{}(value={}, suit={}, is_trump={})'.format(self.__class__, self.value, self.suit, self.is_trump)

@@ -30,3 +30,10 @@ class Player:
 			card = random.choice(self.hand)
 		self.hand.remove(card) # delete the card from our hand
 		return card
+
+	def hasCard(self, suit, value):
+		for h_card in self.hand:
+			if h_card.eq(suit, value):
+				return True
+
+		return None 
