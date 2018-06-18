@@ -46,7 +46,7 @@ class Game:
 		# deal cards
 		for index, player in enumerate(self.players):
 			player.joinGame(self)
-			for i in range(6):
+			for i in range(int(36/len(self.players))):
 				card = self.deck.pop() # take the top card from the deck
 				player.takeCard(card) # add it to the players hand
 		
@@ -90,25 +90,116 @@ class Game:
 				else:
 					return self.players[(i+3) % 4]
 
+	def suit_to_nr(self, suit):
+		if suit == 'clubs':
+			return 0
+		elif suit == 'diamonds':
+			return 1
+		elif suit == 'hearts':
+			return 2
+		else:
+			return 3
+
+	def player_to_string(self, player):
+
+		if player == self.players[0]:
+			return 'player1'
+
+		elif player == self.players[1]:
+			return 'player2'
+		
+		elif player == self.players[2]:
+			return 'player3'
+		
+		else:
+			return 'player4'
+
+	def player_to_nr(self, player):
+
+		if player == self.players[0]:
+			return 0
+
+		elif player == self.players[1]:
+			return 1
+		
+		elif player == self.players[2]:
+			return 2
+		
+		else:
+			return 3
+
 
 	def next_turn(self, outcome):
 
 		# player defended succesfully, so
 		# defender becomes new attacker
 		if outcome == 0:
-			self.attacker = self.defender
+			# transfer cards to discard pile
+			for card in self.attacking_cards:
+				self.discard_pile.append(card)
+				self.updateKnowledge(card, 'discard_pile')
 
+			for card in self.defending_cards:
+				self.discard_pile.append(card)
+				self.updateKnowledge(card, 'discard_pile')
+
+			# reset cards on table
+			self.attacking_cards = []
+			self.defending_cards = []
+
+			# change attacker and defender
+			self.attacker = self.defender
 			self.defender = self.next_player(self.attacker)
 
 		# player failed to defend, so
 		# defender skips turn to attack
 		else:
-			self.attacker = self.next_player(self.defender)
 
+			# transfer cards from table to defender's hand
+			for card in self.attacking_cards:
+				self.defender.hand.add(card)
+				self.updateKnowledge(card, self.defender)
+
+			for card in self.defending_cards:
+				self.defender.hand.add(card)
+				self.updateKnowledge(card, self.defender)
+
+			attacking_suits = [0, 0, 0, 0]
+			for x in range(len(self.defending_cards)):
+				def_card = self.defending_cards[x]
+				att_card = self.attacking_cards[x]
+
+				if def_card.suit != att_card.suit and attacking_suits[self.suit_to_nr(att_card)] == 0:
+					self.smallest[self.suit_to_nr(att_card.suit)][self.player_to_nr(self.defender)] = att_card.value
+
+				attacking_suits[self.suit_to_nr(att_card.suit)] += 1
+
+			if len(self.defending_cards) == 0:
+				self.smallest[self.suit_to_nr(self.attacking_cards[0])][self.player_to_nr(self.defender)] = self.attacking_cards[0].value
+				attacking_suits[self.suit_to_nr(self.attacking_cards[0])] = 1
+
+			for x in range(4):
+				if attacking_suits[x] > 0:
+					self.smallest[x][self.player_to_nr(self.defender)] = 8
+
+			# reset cards on table
+			self.attacking_cards = []
+			self.defending_cards = []
+
+			# change attacker and defender
+			self.attacker = self.next_player(self.defender)
 			self.defender = self.next_player(self.attacker)
+
+	def updateKnowledge(self, card, location):
+
+		for player in self.players:
+			player.knowledge[card] = [self.player_to_string(location)]
 
 	def new_attack(self):
 
+		print(self.player_to_string(self.attacker) + ' attacks')
+		print(self.player_to_string(self.defender) + ' defends')
+		
 		out = False
 
 		while not out:
@@ -118,6 +209,14 @@ class Game:
 			print('attacking card chosen ...')
 			if attacking_card is None:
 				return 0
+			print('Attacking card chosen:')
+			print(attacking_card.suit)
+			print(attacking_card.value)
+			print(str(attacking_card.is_trump))
+			print()
+			self.updateKnowledge(attacking_card, 'table')
+
+			self.attacking_cards.append(attacking_card)
 
 			self.attacker.hand.remove(attacking_card)
 			for player in self.players:
@@ -128,8 +227,18 @@ class Game:
 			defending_card = self.defender.playCard(self.attacker, self.defender, attacking_card)
 			print('defending card chosen ...')
 			if defending_card is None:
+				print('Defender can not defend')
+				print()
 				out = True
 			else:
+				print('Defending card chosen:')
+				print(defending_card.suit)
+				print(defending_card.value)
+				print(str(defending_card.is_trump))
+				print()
+				self.updateKnowledge(defending_card,'table')
+
+				self.defending_cards.append(defending_card)
 				self.defender.hand.remove(defending_card)
 				for player in self.players:
 					if player != self.defender:

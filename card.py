@@ -2,15 +2,15 @@
 
 class Card:
 	values = { # {<symbol>: <value>}
-		'6': 0,
-		'7': 1,
+		'6' : 0,
+		'7' : 1,
 		'8': 2,
 		'9': 3,
-		'10': 4,
-		'J': 5,
-		'Q': 6,
-		'K': 7,
-		'A': 8,
+		'10' : 4,
+		'J' : 5,
+		'Q' : 6,
+		'K' : 7,
+		'A' : 8,
 	}
 	suits = ('clubs', 'spades', 'hearts', 'diamonds')
 	
