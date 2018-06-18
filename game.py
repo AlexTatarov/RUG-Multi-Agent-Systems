@@ -68,7 +68,7 @@ class Game:
 		self.has_ended = True
 
 def main():
-	player_count = 3
+	player_count = 2
 	
 	# create players
 	players = []
