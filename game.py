@@ -27,6 +27,7 @@ class Game:
 		trump_value = random.choice(list(Card.values))
 		trump_suit = random.choice(Card.suits)
 		self.trump_card = Card(trump_value, trump_suit, True)
+		self.cards.add(self.trump_card)
 		
 		for value in Card.values:
 			for suit in Card.suits:
@@ -60,9 +61,7 @@ class Game:
 			self.kripke_model[card] = KripkeModel(states, relations)
 		
 		# the trump card is not in any of the player's hands and they all know it
-		self.kripke_model[self.trump_card].states = {}
-		for player in self.players:
-			self.kripke_model[self.trump_card].relations[player] = {}
+		self.kripke_model[self.trump_card].removeAllPossibleWorlds()
 	
 	def stop(self):
 		""" Resets the game. """
@@ -138,10 +137,12 @@ class Game:
 			for card in self.attacking_cards:
 				self.discard_pile.append(card)
 				self.updateKnowledge(card, 'discard_pile')
+				self.kripke_model[card].removeAllPossibleWorlds()
 
 			for card in self.defending_cards:
 				self.discard_pile.append(card)
 				self.updateKnowledge(card, 'discard_pile')
+				self.kripke_model[card].removeAllPossibleWorlds()
 
 			# reset cards on table
 			self.attacking_cards = []
@@ -159,10 +160,12 @@ class Game:
 			for card in self.attacking_cards:
 				self.defender.hand.add(card)
 				self.updateKnowledge(card, self.defender)
+				self.kripke_model[card].playerHasCard(self.defender)
 
 			for card in self.defending_cards:
 				self.defender.hand.add(card)
 				self.updateKnowledge(card, self.defender)
+				self.kripke_model[card].playerHasCard(self.defender)
 
 			attacking_suits = [0, 0, 0, 0]
 			for x in range(len(self.defending_cards)):
@@ -219,9 +222,7 @@ class Game:
 			self.attacking_cards.append(attacking_card)
 
 			self.attacker.hand.remove(attacking_card)
-			for player in self.players:
-				if player != self.attacker:
-					self.kripke_model[attacking_card].removePossibleWorld(player)
+			self.kripke_model[attacking_card].playerHasCard(self.attacker)
 
 			
 			defending_card = self.defender.playCard(self.attacker, self.defender, attacking_card)
@@ -240,9 +241,7 @@ class Game:
 
 				self.defending_cards.append(defending_card)
 				self.defender.hand.remove(defending_card)
-				for player in self.players:
-					if player != self.defender:
-						self.kripke_model[defending_card].removePossibleWorld(player)
+				self.kripke_model[defending_card].playerHasCard(self.defender)
 		return 1
 
 	def has_ended(self):

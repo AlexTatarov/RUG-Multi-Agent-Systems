@@ -54,6 +54,10 @@ Computer is an extension of the Player class in which the game logic for the AI 
 
 User is an extension of the Player class and implements the decision making for the human player in the game. The simple implementation shows the user their hand and allows them to pick a card using a command prompt when it is the user's turn. If we build a GUI for the game, we should be able to easily hook this class up to click events in the user interface.
 
+### KripkeModel
+
+THe KripkeModel class represents the knowledge of all the players about one card in a Kripke model. The Kripke model consists of a set of worlds, one for each player, and a separate set of relations for each player. This way we can model what a player knows about each card.
+
 ____________________
 
 ## Kripke Models
