@@ -11,7 +11,7 @@ class KripkeModel:
 		""" Remove the state that represents a world in which <player> is holding the card. """
 		state = self.states.get(player)
 		if state is not None:
-			for player, relations in self.relations.items():
+			for _, relations in self.relations.items():
 				for relation in relations:
 					if relation[0] == state or relation[1] == state:
 						relations.remove(state)
@@ -26,7 +26,7 @@ class KripkeModel:
 	
 	def playerHasCard(self, player):
 		""" Removes states and relations in the Kripke model in such a way that only the world in which <player> has the card is still considered a possible world. """
-		for player2, world in self.states:
+		for player2 in list(self.states.keys()):
 			if player2 != player:
 				self.removePossibleWorld(player2)
 
