@@ -27,6 +27,14 @@ At the end of each turn, whether or not the defense was successful, each player 
 The last person left with cards in their hand is the loser (the *fool* or *"durak"*).
 
 ____________________
+## Assumptions
+In order to better adapt the game to the requirements of the course we used the following assumptions, so there will be more knowledge to be extracted:
+- if a defending player can defend, he will defend
+- if an attacking player can attack, he will attack
+- defending player will always use the lowest possible card to defend to get more information about our model and to simplify the complexity of the algorithm as it is not the goal of the project to build a complex game
+- all the cards are divided in the setup of the game in order to create more interaction between players
+- only one player attacks
+- players attack with one card at a time (we use this due to ease of implementation)
 ____________________
 
 
@@ -40,7 +48,7 @@ The Card class is used to represent the cards present in a game of Durak. When a
 
 ### Game
 
-The Game class runs the game of Durak. It knows about the players, all the cards, the deck, the discard pile and the common knowledge between the players. It takes care of attack cycles, turn taking, updating common knowledge and checking win conditions.
+The Game class runs the game of Durak. It knows about the players, all the cards, the discard pile. It takes care of attack cycles, turn taking, updating knowledge and checking stopping conditions.
 
 ### Player
 
@@ -48,7 +56,7 @@ The Player class implements all the logic for a player in the game of Durak, inc
 
 ### Computer
 
-Computer is an extension of the Player class in which the game logic for the AI is implemented. The relevant method here is playCard(), which allows the player to choose a card from their hand that it wants to play. The method is invoked by Game and returns a Card object.
+Computer is an extension of the Player class in which the game logic for the AI is implemented. The relevant method here is playCard(), which allows the player to choose a card from their hand that it wants to play. The method is invoked by Game and returns a Card object or None in case it does not have a card to attack or to defend. According to our assumptions, defending player will use the smallest possible card to defend. The attacking player will try to find the card that will put defender in a situation in which he would not be able de defend and therefore take cards from table and miss attacking turn. In case there are no cards that guarantee that the defender will take up the cards then the smallest from attackers hand will be used. Also, the attacker will try to use first simple cards and only if he doesn't have any other option, he will use the trump cards
 
 ### User
 
