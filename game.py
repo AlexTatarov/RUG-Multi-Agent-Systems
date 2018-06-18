@@ -50,18 +50,19 @@ class Game:
 				card = self.deck.pop() # take the top card from the deck
 				player.takeCard(card) # add it to the players hand
 		
-		# initialize common knowledge
+		# create kripke model for each card
 		for card in self.cards:
-			states = {player: index for player, index in enumerate(players)}
+			states = {player: index for player, index in enumerate(self.players)}
 			relations = {
-				player: set((i, j) for i in range(len(players)) for j in range(len(players)))
+				player: set((i, j) for i in range(len(self.players)) for j in range(len(self.players)))
 				for player in self.players
 			}
 			self.kripke_model[card] = KripkeModel(states, relations)
 		
 		# the trump card is not in any of the player's hands and they all know it
+		self.kripke_model[self.trump_card].states = {}
 		for player in self.players:
-			self.kripke_model[self.trump_card] = None
+			self.kripke_model[self.trump_card].relations[player] = {}
 	
 	def stop(self):
 		""" Resets the game. """
@@ -112,21 +113,27 @@ class Game:
 
 		while not out:
 			
-			card = self.attacker.playCard(self.attacker, self.defender)
+			attacking_card = self.attacker.playCard(self.attacker, self.defender)
 			
 			print('attacking card chosen ...')
-			if card == None:
+			if attacking_card is None:
 				return 0
 
-			self.attacker.hand.remove(card)
+			self.attacker.hand.remove(attacking_card)
+			for player in self.players:
+				if player != self.attacker:
+					self.kripke_model[attacking_card].removePossibleWorld(player)
 
 			
-			card = self.defender.playCard(self.attacker, self.defender)
+			defending_card = self.defender.playCard(self.attacker, self.defender, attacking_card)
 			print('defending card chosen ...')
-			if card == None:
+			if defending_card is None:
 				out = True
 			else:
-				self.defender.hand.remove(card)
+				self.defender.hand.remove(defending_card)
+				for player in self.players:
+					if player != self.defender:
+						self.kripke_model[defending_card].removePossibleWorld(player)
 		return 1
 
 	def has_ended(self):
