@@ -58,9 +58,10 @@ ____________________
 
 ## Kripke Models
 
-We implemented a separate Kripke model for each card. Each world in a kripke model represents a world in which one of the players has that specific card.
-
 ![Image of a Kripke Model](Model.png)
+
+We implemented a separate Kripke model for each card. Each world in a kripke model represents a world in which one of the players has that specific card. For example, if there are 2 players and there is a kripke model for the ace of spades, there are two possible worlds: one in which player 1 has the ace of spades and a world in which player 2 has the ace of spades.
+An example of what such a Kripke model looks like for 4 players is shown in the image above. Player 4 has the ace of spades and thus only considers it possible that he has the card in his hand. The other three players that do not have the card, only consider it possible that one of the other players has the card, because they know they do not have the card themselves. There are reflexive relations to each world, because we are working in S5.
 
 ____________________
 
