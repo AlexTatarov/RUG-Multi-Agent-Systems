@@ -15,6 +15,16 @@ class Computer(Player):
 
 		return None
 
+	def suit_to_nr(self, suit):
+		if suit == 'clubs':
+			return 0
+		elif suit == 'diamonds':
+			return 1
+		elif suit == 'hearts':
+			return 2
+		else:
+			return 3
+
 	def playCard(self, attacking_player, defending_player, attacking_card=None):
 
 		chosen_card = None
@@ -101,12 +111,12 @@ class Computer(Player):
 								
 					# if there is knowledge of some highest card for a suit use that knowledge
 					# else use the suit with least cards
-					for suit in range(0,4):
-						if(self.game.smallest[suit][def_player] < 8):
-							for value in range(self.game.smallest[suit][def_player], 8):
-								card = self.hasCard(suit, value)
-								if(card != None):
-									possible_cards.append(card)
+					for suit in self.suits:
+						if(self.game.smallest[self.suit_to_nr(suit)][def_player] < 8):
+							for value in range(self.game.smallest[self.suit_to_nr(suit)][def_player], 8):
+								for card in self.hand:
+									if card.suit == suit and card.value == value:
+										possible_cards.append(card)
 
 					# check if you have the last cards of some suit
 					discard_suit = {}
@@ -138,7 +148,6 @@ class Computer(Player):
 					if len(possible_cards) > 0:
 
 						chosen_card = possible_cards[0]						
-
 						for card in possible_cards:
 							if not card.is_trump:
 								if card < chosen_card or (own_suit[chosen_card.suit] > own_suit[card.suit]):
@@ -169,7 +178,19 @@ class Computer(Player):
 
 			# PLAYER CONTINUES ATTACK
 			else:
-				
+				discard_suit = {}
+				own_suit = {}
+
+				for suit in self.suits:
+					discard_suit[suit] = 0
+					own_suit[suit] = 0
+
+				for card in self.game.discard_pile:
+					discard_suit[card.suit] += 1
+
+				for card in self.hand:
+					own_suit[card.suit] += 1
+
 				possible_cards = []
 
 				played_cards = []
@@ -192,7 +213,7 @@ class Computer(Player):
 				# if there are any possible cards to use
 				if len(possible_cards) > 0:
 					for card in possible_cards:
-						if(self.game.smallest[card.suit][def_player] <= card.value):
+						if(self.game.smallest[self.suit_to_nr(card.suit)][def_player] <= card.values[card.value]):
 							chosen_card = card
 
 					if(chosen_card == None):

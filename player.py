@@ -21,7 +21,6 @@ class Player:
 			self.knowledge[card] = set('deck')
 			for i in range(len(self.game.players)):
 				self.knowledge[card].add('player' + str(i))
-		self.knowledge[self.game.trump_card] = ['deck'] # the trump card is in the deck
 	
 	def takeCard(self, card):
 		self.hand.add(card)
@@ -37,7 +36,7 @@ class Player:
 
 	def hasCard(self, suit, value):
 		for h_card in self.hand:
-			if h_card.eq(suit, value):
+			if h_card.suit == suit and h_card.value == value:
 				return True
 
 		return None 
