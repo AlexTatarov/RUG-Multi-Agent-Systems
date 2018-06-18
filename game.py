@@ -1,8 +1,8 @@
 
 from card import Card
 from computer import Computer
+from kripke_model import KripkeModel
 import random
-import numpy as np
 
 class Game:
 	def __init__(self, players):
@@ -17,6 +17,7 @@ class Game:
 		self.smallest = [[8] * 4 for y in range(len(players))]
 
 		self.players = players
+		self.kripke_model = {} # {<card>: KripkeModel(states={<player>: <world_number>}, relations={<player>: set((<world_number>, <world_number>))})}
 		self.common_knowledge = {}
 		self.attacker = players[0]
 		self.defender = players[1]
@@ -43,7 +44,7 @@ class Game:
 		self.deck.insert(0, self.trump_card)
 		
 		# deal cards
-		for player in self.players:
+		for index, player in enumerate(self.players):
 			player.joinGame(self)
 			for i in range(int(36/len(self.players))):
 				card = self.deck.pop() # take the top card from the deck
@@ -55,6 +56,18 @@ class Game:
 
 
 
+
+			states = {player: index for player, index in enumerate(players)}
+			relations = {
+				player: set((i, j) for i in range(len(players)) for j in range(len(players)))
+				for player in self.players
+			}
+			self.kripke_model[card] = KripkeModel(states, relations)
+		
+		# the trump card is not in any of the player's hands and they all know it
+		for player in self.players:
+			self.kripke_model[self.trump_card] = None
+	
 	def stop(self):
 		""" Resets the game. """
 		self.cards = set()
@@ -62,8 +75,8 @@ class Game:
 		self.attacking_cards = []
 		self.defending_cards = []
 		self.discard_pile = []
-		self.common_knowledge = {}
-
+		self.kripke_model = {}
+		
 		for player in self.players:
 			player.hand = []
 
