@@ -2,11 +2,15 @@
 import random
 
 class Player:
+	
+	
+
 	def __init__(self):
 		self.game = None
 		self.hand = set()
 		self.knowledge = {}
-	
+		self.suits = ('clubs', 'diamonds', 'hearts', 'spades')
+		
 	def joinGame(self, game):
 		self.game = game
 		self.hand = set() # reset hand
