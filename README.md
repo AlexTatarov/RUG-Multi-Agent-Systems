@@ -56,6 +56,14 @@ User is an extension of the Player class and implements the decision making for 
 
 ____________________
 
+## Kripke Models
+
+We implemented a separate Kripke model for each card. Each world in a kripke model represents a world in which one of the players has that specific card.
+
+![Image of a Kripke Model](Model.png)
+
+____________________
+
 ## Future Improvements
 
 - Build a UI for better representation of the game as stated above. 
