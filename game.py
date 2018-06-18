@@ -53,7 +53,9 @@ class Game:
 		for card in self.cards:
 			self.common_knowledge[card] = ['deck'] + ['player' + str(i) for i in range(len(self.players))] # each card can be either in the deck or in one of the player's hands
 		self.common_knowledge[self.trump_card] = ['deck'] # the trump card is in the deck
-	
+
+
+
 	def stop(self):
 		""" Resets the game. """
 		self.cards = set()
@@ -135,6 +137,7 @@ class Game:
 
 def main():
 	player_count = 4
+
 	
 	# create players
 	players = []
