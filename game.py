@@ -11,12 +11,15 @@ class Game:
 		self.attacking_cards = []
 		self.defending_cards = []
 		self.discard_pile = []
+		self.outcome = 0
 		
 		# smallest card that every player could not defend
-		self.smallest = [[8 for x in range(4)] for y in range(players)]
+		self.smallest = [[8] * 4 for y in range(len(players))]
 
 		self.players = players
 		self.common_knowledge = {}
+		self.attacker = players[0]
+		self.defender = players[1]
 	
 	def start(self):
 		""" Initialize the deck and deal the starting hands. """
@@ -59,16 +62,79 @@ class Game:
 		self.defending_cards = []
 		self.discard_pile = []
 		self.common_knowledge = {}
-		
+
 		for player in self.players:
 			player.hand = []
-	
-	def next_action(self):
-		""" Simulate the next action. """
-		self.has_ended = True
+
+	def next_player(self, player):
+		""" Return next player that has cards """
+		for i in range(len(self.players)):
+			if player == self.players[i]:
+
+				if len(self.players[(i+1) % 4].hand) > 0:
+					return self.players[(i+1) % 4]
+
+				elif len(self.players[(i+2) % 4].hand) > 0:
+					return self.players[(i+2) % 4]
+
+				else:
+					return self.players[(i+3) % 4]
+
+
+	def next_turn(self, outcome):
+
+		# player defended succesfully, so
+		# defender becomes new attacker
+		if outcome == 0:
+			self.attacker = self.defender
+
+			self.defender = self.next_player(self.attacker)
+
+		# player failed to defend, so
+		# defender skips turn to attack
+		else:
+			self.attacker = self.next_player(self.defender)
+
+			self.defender = self.next_player(self.attacker)
+
+	def new_attack(self):
+
+		out = False
+
+		while not out:
+			
+			card = self.attacker.playCard(self.attacker, self.defender)
+			
+			print('attacking card chosen ...')
+			if card == None:
+				return 0
+
+			self.attacker.hand.remove(card)
+
+			
+			card = self.defender.playCard(self.attacker, self.defender)
+			print('defending card chosen ...')
+			if card == None:
+				out = True
+			else:
+				self.defender.hand.remove(card)
+		return 1
+
+	def has_ended(self):
+
+		counter = 0
+
+		for player in self.players:
+			if len(player.hand) > 0 :
+				counter += 1
+
+		if counter > 1:
+			return False
+		else:
+			return True
 
 def main():
-	player_count = 3
+	player_count = 4
 	
 	# create players
 	players = []
@@ -79,8 +145,14 @@ def main():
 	# create a new game and let the players take actions until the game has ended
 	game = Game(players)
 	game.start()
-#	while not game.has_ended:
-#		game.next_action()
+
+	while not game.has_ended():
+
+		print('New attack ...')
+		outcome = game.new_attack()
+
+		print('End of turn')
+		game.next_turn(outcome)
 
 if __name__ == '__main__':
 	main()
