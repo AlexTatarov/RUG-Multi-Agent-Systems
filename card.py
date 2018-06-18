@@ -13,6 +13,17 @@ class Card:
 		'A' : 8,
 	}
 	suits = ('clubs', 'spades', 'hearts', 'diamonds')
+	symbol_names = { # {<symbol>: <name>}
+		'6' : 'six',
+		'7' : 'seven',
+		'8': 'eight',
+		'9': 'nine',
+		'10' : 'ten',
+		'J' : 'jack',
+		'Q' : 'queen',
+		'K' : 'king',
+		'A' : 'ace',
+	}
 	
 	def __init__(self, value, suit, is_trump):
 		self.value = value

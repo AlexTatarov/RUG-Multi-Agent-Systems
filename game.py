@@ -200,8 +200,8 @@ class Game:
 
 	def new_attack(self):
 
-		print(self.player_to_string(self.attacker) + ' attacks')
-		print(self.player_to_string(self.defender) + ' defends')
+		print(self.player_to_string(self.attacker).capitalize() + ' attacks')
+		print(self.player_to_string(self.defender).capitalize() + ' defends')
 		
 		out = False
 
@@ -209,13 +209,11 @@ class Game:
 			
 			attacking_card = self.attacker.playCard(self.attacker, self.defender)
 			
-			print('attacking card chosen ...')
+			print('Attacking card chosen ...')
 			if attacking_card is None:
 				return 0
-			print('Attacking card chosen:')
-			print(attacking_card.suit)
-			print(attacking_card.value)
-			print(str(attacking_card.is_trump))
+			print(Card.symbol_names[attacking_card.value].capitalize(), 'of', attacking_card.suit, end='')
+			print(' (trump card)' if attacking_card.is_trump else '')
 			print()
 			self.updateKnowledge(attacking_card, 'table')
 
@@ -226,16 +224,14 @@ class Game:
 
 			
 			defending_card = self.defender.playCard(self.attacker, self.defender, attacking_card)
-			print('defending card chosen ...')
+			print('Defending card chosen ...')
 			if defending_card is None:
 				print('Defender can not defend')
 				print()
 				out = True
 			else:
-				print('Defending card chosen:')
-				print(defending_card.suit)
-				print(defending_card.value)
-				print(str(defending_card.is_trump))
+				print(Card.symbol_names[defending_card.value].capitalize(), 'of', defending_card.suit, end='')
+				print(' (trump card)' if defending_card.is_trump else '')
 				print()
 				self.updateKnowledge(defending_card,'table')
 
@@ -278,6 +274,10 @@ def main():
 
 		print('End of turn')
 		game.next_turn(outcome)
+	
+	for player in game.players:
+		if len(player.hand) > 0:
+			print(game.player_to_string(player).capitalize(), 'wins the game!')
 
 if __name__ == '__main__':
 	main()
