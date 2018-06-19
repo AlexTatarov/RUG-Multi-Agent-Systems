@@ -200,8 +200,8 @@ class Game:
 
 	def new_attack(self):
 
-		print(self.player_to_string(self.attacker).capitalize() + ' attacks')
-		print(self.player_to_string(self.defender).capitalize() + ' defends')
+		print('	' + self.player_to_string(self.attacker).capitalize() + ' attacks')
+		print('	' + self.player_to_string(self.defender).capitalize() + ' defends')
 		
 		out = False
 
@@ -209,10 +209,10 @@ class Game:
 			
 			attacking_card = self.attacker.playCard(self.attacker, self.defender)
 			
-			print('Attacking card chosen ...')
+			print('	Attacking decision made ...')
 			if attacking_card is None:
 				return 0
-			print(Card.symbol_names[attacking_card.value].capitalize(), 'of', attacking_card.suit, end='')
+			print('	' + Card.symbol_names[attacking_card.value].capitalize(), 'of', attacking_card.suit, end='')
 			print(' (trump card)' if attacking_card.is_trump else '')
 			print()
 			self.updateKnowledge(attacking_card, 'table')
@@ -224,13 +224,13 @@ class Game:
 
 			
 			defending_card = self.defender.playCard(self.attacker, self.defender, attacking_card)
-			print('Defending card chosen ...')
+			print('	Defending decision made ...')
 			if defending_card is None:
-				print('Defender can not defend')
+				print('	Defender can not defend')
 				print()
 				out = True
 			else:
-				print(Card.symbol_names[defending_card.value].capitalize(), 'of', defending_card.suit, end='')
+				print('	' + Card.symbol_names[defending_card.value].capitalize(), 'of', defending_card.suit, end='')
 				print(' (trump card)' if defending_card.is_trump else '')
 				print()
 				self.updateKnowledge(defending_card,'table')
@@ -269,15 +269,23 @@ def main():
 
 	while not game.has_ended():
 
-		print('New attack ...')
+		print('\n	New attack ...')
 		outcome = game.new_attack()
 
-		print('End of turn')
+		print('	End of turn')
 		game.next_turn(outcome)
 	
-	for player in game.players:
-		if len(player.hand) > 0:
-			print(game.player_to_string(player).capitalize(), 'wins the game!')
+	has_cards = 0
+	for x in range(4):
+		if len(game.players[x].hand) > 0:
+			has_cards += 1
+
+	if has_cards > 0:
+		for player in game.players:
+			if len(player.hand) > 0:
+				print('	' + game.player_to_string(player).capitalize(), 'loses!')
+	else:
+		print('	Tie!')
 
 if __name__ == '__main__':
 	main()

@@ -80,7 +80,7 @@ class Computer(Player):
 
 		else:
 
-			### PLAYE RINITIATES ATTACK
+			### PLAYER INITIATES ATTACK
 			if len(self.game.attacking_cards) == 0 : 
 				### player can choose any card to INITIATE ATTACK
 
